@@ -1,0 +1,24 @@
+[data-theme],
+.theme-light,
+.theme-dark {
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+}
+
+:root,
+.theme-dark,
+[data-theme='dark'] {
+	/* Background */
+	--color-background-hsl: var(--color-black-hsl);
+	--color-background: hsl(var(--color-background-hsl));
+	--color-foreground-hsl: var(--color-white-hsl);
+	--color-foreground: hsl(var(--color-foreground-hsl));
+}
+
+.theme-light,
+[data-theme='light'] {
+	--color-background-hsl: var(--color-white-hsl);
+	--color-background: hsl(var(--color-background-hsl));
+	--color-foreground-hsl: var(--color-black-hsl);
+	--color-foreground: hsl(var(--color-foreground-hsl));
+}

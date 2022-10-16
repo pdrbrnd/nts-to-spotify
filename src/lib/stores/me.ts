@@ -17,7 +17,7 @@ export const me = readable<User | null | undefined>(undefined, function start(se
 	if (!browser) return;
 
 	const fetchUser = async () => {
-		const res = await fetch('/api/auth');
+		const res = await fetch('/api/auth/me');
 		set((await res.json()) as User | null);
 	};
 

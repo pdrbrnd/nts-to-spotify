@@ -1,0 +1,34 @@
+/* 
+  Elevated Links
+
+  when you need to have a fully clickable card with another link inside, 
+  you can use the `data-elevated` attribute in a link to make the entire card clickable.
+
+  you can then have other sibling links that will work as intended.
+
+  <div className="elevated-link">
+    <a href="/link1" data-elevated>Title</a>
+    <a href="/link2">find out more</a>
+  </div>
+
+  the whole card will link to /link1, 
+  but the second link is still fully functional.
+*/
+
+.elevated-link {
+  position: relative;
+}
+
+.elevated-link a[href] {
+  position: static;
+  z-index: 1;
+}
+
+.elevated-link a[href][data-elevated]::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

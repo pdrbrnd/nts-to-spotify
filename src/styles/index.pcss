@@ -1,0 +1,24 @@
+@import './reset.pcss';
+@import './fonts.pcss';
+@import './tokens.pcss';
+@import './media.pcss';
+@import './theme.pcss';
+@import './animation.pcss';
+@import './utilities/index.pcss';
+@import './components/index.pcss';
+
+body {
+	font-family: var(--font-family-sans);
+	background-color: var(--color-background);
+	color: var(--color-foreground);
+}
+
+::selection {
+	background-color: var(--color-foreground);
+	color: var(--color-background);
+}
+
+html,
+body {
+	height: 100%;
+}

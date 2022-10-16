@@ -1,0 +1,67 @@
+:root {
+	/* Font family */
+	--font-family-sans: 'Oswald', -apple-system, blinkmacsystemfont, 'Segoe UI', roboto, oxygen,
+		ubuntu, cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+
+	/* Size **/
+	--font-size-xs: 0.625rem;
+	--font-size-sm: 0.875rem;
+	--font-size-md: 1rem;
+	--font-size-lg: 1rem;
+	--font-size-xl: 1.25rem;
+	--font-size-2xl: 1.5rem;
+
+	/* Weight **/
+	--font-weight-medium: 500;
+	--font-weight-bold: 600;
+	--font-weight-extra-bold: 700;
+
+	/* Line Height **/
+	--font-line-height-none: 1;
+	--font-line-height-normal: 1.18;
+
+	/* Letter Spacing **/
+	--font-letter-spacing-spaced: 0.0325em;
+
+	/* Z-index */
+	--z-index-0: 0;
+	--z-index-1: 100;
+	--z-index-2: 200;
+	--z-index-3: 300;
+	--z-index-4: 400;
+	--z-index-5: 500;
+	--z-index-max: 999;
+
+	/* Transitions */
+	--transition-appearance: 200ms ease;
+	--transition-motion: 300ms cubic-bezier(0.2, 1, 0.2, 1);
+	--transition-smooth: 400ms cubic-bezier(0.9, 0, 0.05, 1);
+	--transition-in-out: 300ms ease-in-out;
+
+	@media (prefers-reduced-motion: reduce) {
+		:root {
+			--transition-appearance: 0s linear;
+			--transition-motion: 0s linear;
+			--transition-smooth: 0s linear;
+			--transition-in-out: 0s linear;
+		}
+
+		* {
+			animation: none !important;
+			transition: none !important;
+		}
+	}
+
+	/* Shadows */
+	--shadow-xs: 0px 16px 32px hsl(240, 2%, 10% / var(--opacity-40));
+	--shadow-sm: 0px 8px 4px hsl(240, 2%, 10% / var(--opacity-20));
+	--shadow-md: 120px 184px 0px hsl(var(--color-grey-900-hsl) / var(--opacity-10)),
+		32px 116px 80px hsl(var(--color-grey-900-hsl) / var(--opacity-10));
+
+	/* Palette */
+
+	--color-black-hsl: 0, 0%, 0%;
+	--color-black: hsla(var(--color-black-hsl), 1);
+	--color-white-hsl: 0, 0%, 100%;
+	--color-white: hsla(var(--color-white-hsl), 1);
+}
