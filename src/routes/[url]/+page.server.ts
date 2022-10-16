@@ -2,7 +2,6 @@ import { getAccessToken } from '$lib/utils/auth.server';
 import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { getCheerioDocument, getNTSData } from '$lib/utils/nts.server';
-import { REFRESH_TOKEN_KEY } from '$lib/constants';
 
 export const load: PageServerLoad = async (event) => {
 	const {
@@ -11,8 +10,6 @@ export const load: PageServerLoad = async (event) => {
 
 	const token = await getAccessToken(event);
 
-	// redirect
-	console.log(token);
 	if (!token) throw redirect(307, '/');
 
 	if (
