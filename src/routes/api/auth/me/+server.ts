@@ -1,19 +1,16 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '$lib/constants';
-import { refreshAccessToken } from '../utils.server';
 import type { User } from '$lib/stores/me';
+import { getAccessToken } from '$lib/utils/auth.server';
 
 export const GET: RequestHandler = async (event) => {
-	const refresh = event.cookies.get(REFRESH_TOKEN_KEY);
+	const token = await getAccessToken(event);
 
-	if (!refresh) return json(null);
-
-	const access = event.cookies.get(ACCESS_TOKEN_KEY) || (await refreshAccessToken(refresh, event));
+	if (!token) return json(null);
 
 	const res = await fetch('https://api.spotify.com/v1/me', {
 		headers: {
-			Authorization: `Bearer ${access}`
+			Authorization: `Bearer ${token}`
 		}
 	});
 

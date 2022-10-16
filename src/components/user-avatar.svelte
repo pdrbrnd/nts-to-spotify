@@ -2,6 +2,7 @@
 	import { me } from '$lib/stores/me';
 	import { env } from '$env/dynamic/public';
 	import { SPOTIFY_REDIRECT_URI, SPOTIFY_SCOPES } from '$lib/constants';
+	import { clickOutside } from '$lib/actions/clickoutside';
 
 	let visible = false;
 </script>
@@ -24,8 +25,18 @@
 			<p class="font-upper">{$me.display_name}</p>
 			<div class="avatar" style="background-image: url({$me?.images[0]?.url})" />
 		</button>
-		<div class="popover" data-theme="light" style="top: {visible ? '100%' : '0'}">
-			<a class="font-upper" href="/api/auth/logout">Logout</a>
+		<div
+			class="popover"
+			data-theme="light"
+			style="top: {visible ? '100%' : '0'}"
+			use:clickOutside={() => (visible = false)}
+		>
+			<a class="font-upper" href="/api/auth/logout">
+				<!-- TODO: icon here -->
+				<i class="i-logout" />
+
+				<span>Logout</span>
+			</a>
 		</div>
 	</div>
 {/if}
@@ -95,5 +106,12 @@
 		right: 0;
 
 		transition: top var(--transition-motion);
+
+		& a {
+			width: 100%;
+			display: inline-flex;
+			align-items: center;
+			justify-content: space-between;
+		}
 	}
 </style>

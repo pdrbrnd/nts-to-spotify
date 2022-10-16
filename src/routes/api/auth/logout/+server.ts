@@ -4,9 +4,13 @@ import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '$lib/constants';
 
 export const GET: RequestHandler = async (event) => {
 	event.cookies.set(ACCESS_TOKEN_KEY, '', {
+		httpOnly: true,
+		path: '/',
 		maxAge: -1
 	});
 	event.cookies.set(REFRESH_TOKEN_KEY, '', {
+		httpOnly: true,
+		path: '/',
 		maxAge: -1
 	});
 
