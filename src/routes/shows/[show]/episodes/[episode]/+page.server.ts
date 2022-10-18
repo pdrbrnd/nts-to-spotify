@@ -3,6 +3,7 @@ import { redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 import { getCheerioDocument, getNTSData } from '$lib/utils/nts.server';
 import { routeParamsToNtsUrl } from '$lib/utils/nts';
+import { REDIRECT_TO_KEY } from '$lib/constants';
 
 export const load: PageServerLoad = async (event) => {
 	const {
@@ -13,7 +14,11 @@ export const load: PageServerLoad = async (event) => {
 
 	const token = await getAccessToken(event);
 
-	if (!token) throw redirect(307, '/');
+	if (!token) {
+		// save cookie to redirect after login
+		event.cookies.set(REDIRECT_TO_KEY, event.url.pathname, { path: '/' });
+		throw redirect(307, '/');
+	}
 
 	const document = await getCheerioDocument(url);
 	const data = await getNTSData(document);
