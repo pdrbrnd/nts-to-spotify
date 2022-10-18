@@ -26,6 +26,10 @@
 	setContext('me', data.user);
 </script>
 
+<svelte:head>
+	<title>{$page.data.title || 'NTS to Spotify'}</title>
+</svelte:head>
+
 <div class="holder" style={image ? `background-image: url(${$page.data?.cover || image})` : ''}>
 	<Header />
 	<main>

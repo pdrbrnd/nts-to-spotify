@@ -6,7 +6,7 @@ export const getCheerioDocument = async (url: string) => {
 	const res = await fetch(url);
 
 	if (!res.ok) {
-		throw error(400, `Unable to load document from url: ${url}`);
+		throw error(404, `Unable to load document from url: ${url}`);
 	}
 
 	return load(await res.text());
@@ -16,7 +16,7 @@ export const getNTSData = ($: CheerioAPI) => {
 	const title = $('h1').first().text();
 
 	// Description
-	const description = $('.description h3').text();
+	const description = $('.description h3').first().text();
 
 	// Show date
 	const date = $('#episode-broadcast-date').text().replace(',', '').replaceAll('.', '-').trim();

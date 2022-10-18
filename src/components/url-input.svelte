@@ -3,9 +3,12 @@
 	import { afterNavigate, goto } from '$app/navigation';
 	import Button from './button.svelte';
 	import Icon from './icon/icon.svelte';
+	import { ntsUrlToRouteUrl, routeParamsToNtsUrl } from '$lib/utils/nts';
 
 	const getUrlFromParams = () => {
-		return $page.params.url ? decodeURIComponent($page.params.url) : '';
+		return $page.params.show && $page.params.episode
+			? routeParamsToNtsUrl($page.params.show, $page.params.episode)
+			: '';
 	};
 
 	let value = getUrlFromParams();
@@ -15,7 +18,7 @@
 	});
 
 	const handleSubmit = () => {
-		goto(`/${encodeURIComponent(value)}`);
+		goto(ntsUrlToRouteUrl(value));
 	};
 </script>
 
