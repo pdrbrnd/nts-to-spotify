@@ -1,30 +1,74 @@
 <script lang="ts">
-	import Header from '$components/header.svelte';
 	import '$styles/index.pcss';
 	import { page } from '$app/stores';
+	import { onMount, setContext } from 'svelte';
+	import type { LayoutData } from './$types';
+	import { Header, Panel, Logo, LoginWithSpotify, Divider, Button } from '$components';
 
 	const images = [
-		'https://unsplash.com/photos/YDf2T-Uyq7U/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjY1OTM3MzM4&force=true&w=1600',
-		'https://unsplash.com/photos/pTeZKi29EYE/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8Mnx8dmlueWwlMjBzdG9yZXxlbnwwfHx8fDE2NjU5MzU1MjQ&force=true&w=1600',
-		'https://unsplash.com/photos/sFjSUUfF_2Y/download?ixid=MnwxMjA3fDB8MXxhbGx8fHx8fHx8fHwxNjY1OTU0MDMw&force=true&w=1600',
-		'https://unsplash.com/photos/RqASow2Y6Os/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8Nnx8dmlueWwlMjBzdG9yZXxlbnwwfHx8fDE2NjU5MzU1MjQ&force=true&w=1600',
-		'https://unsplash.com/photos/z-qxSYHXrh4/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MTJ8fHZpbnlsJTIwc3RvcmV8ZW58MHx8fHwxNjY1OTM1NTI0&force=true&w=1600',
-		'https://unsplash.com/photos/W8BRzoUTHNA/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MTN8fHZpbnlsJTIwc3RvcmV8ZW58MHx8fHwxNjY1OTM1NTI0&force=true&w=1600',
-		'https://unsplash.com/photos/7W5BWwc36A8/download?ixid=MnwxMjA3fDB8MXxzZWFyY2h8MTd8fHZpbnlsJTIwc3RvcmV8ZW58MHx8fHwxNjY1OTM1NTI0&force=true&w=1600'
+		'/bg1.jpg',
+		'/bg2.jpg',
+		'/bg3.jpg',
+		'/bg4.jpg',
+		'/bg5.jpg',
+		'/bg6.jpg',
+		'/bg7.jpg'
 	];
 
-	const image = images[Math.floor(Math.random() * 100) % images.length];
+	let image = '';
+
+	onMount(() => {
+		image = images[Math.floor(Math.random() * 100) % images.length];
+	});
+
+	export let data: LayoutData;
+
+	setContext('me', data.user);
 </script>
 
-<div style="background-image: url({$page.data?.cover || image})">
+<div class="holder" style={image ? `background-image: url(${$page.data?.cover || image})` : ''}>
 	<Header />
 	<main>
-		<slot />
+		{#if data.user}
+			<slot />
+		{:else}
+			<Panel>
+				<Logo />
+				<h1 class="font-title">NTS to Spotify</h1>
+
+				<p class="font-base">Create Spotify playlists from NTS episodes.</p>
+
+				<ol class="font-base">
+					<li>Log in with Spotify so we can create the playlist on your behalf</li>
+					<li>Paste the NTS episode URL into the top bar</li>
+					<li>Preview and manage your tracklist</li>
+					<li>Import to Spotify</li>
+				</ol>
+
+				<LoginWithSpotify />
+
+				<Divider />
+
+				<div>
+					<p class="support">Support the project</p>
+					<Button
+						as="a"
+						variant="outline"
+						icon="coffee"
+						href="https://ko-fi.com/pdrbrnd"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<span class="coffee">Buy me a coffee</span>
+					</Button>
+				</div>
+			</Panel>
+		{/if}
 	</main>
 </div>
 
-<style>
-	div {
+<style lang="postcss">
+	.holder {
 		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: cover;
@@ -37,5 +81,18 @@
 
 	main {
 		flex: 1;
+
+		display: flex;
+		flex-direction: column;
+	}
+
+	ol {
+		list-style-type: decimal;
+
+		margin-left: 16px;
+	}
+
+	.support {
+		margin-bottom: 8px;
 	}
 </style>
