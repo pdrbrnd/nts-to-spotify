@@ -1,54 +1,68 @@
-<script>
+<script lang="ts">
 	import Logo from './logo.svelte';
 	import UserAvatar from './user-avatar.svelte';
-	import { page } from '$app/stores';
 
-	import { me } from '$lib/stores/me';
-	import { afterNavigate, goto } from '$app/navigation';
+	import type { User } from '$lib/types';
+	import Button from './button.svelte';
+	import UrlInput from './url-input.svelte';
+	import { getContext } from 'svelte';
 
-	const getUrlFromParams = () => {
-		return $page.params.url ? decodeURIComponent($page.params.url) : '';
-	};
-
-	let input = getUrlFromParams();
-
-	afterNavigate(() => {
-		input = getUrlFromParams();
-	});
-
-	const handleSubmit = () => {
-		goto(`/${encodeURIComponent(input)}`);
-	};
+	const me = getContext<User>('me');
 </script>
 
 <header>
-	<div class="left">
-		<a href="/" class="logo">
-			<Logo />
-		</a>
-		{#if $me?.id}
-			<form on:submit|preventDefault={handleSubmit}>
-				<input bind:value={input} placeholder="Paste here the episode URL and press Enter" />
-			</form>
-		{/if}
+	<div class="inner">
+		<div class="left">
+			<a href="/" class="logo">
+				<Logo />
+			</a>
+		</div>
+		<div class="right">
+			<UserAvatar />
+		</div>
 	</div>
-	<div class="right">
-		<UserAvatar />
-	</div>
+	{#if me?.id}
+		<div class="sub">
+			<UrlInput />
+			<Button
+				as="a"
+				icon="coffee"
+				href="https://ko-fi.com/pdrbrnd"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
+				<span class="coffee">Buy me a coffee</span>
+			</Button>
+		</div>
+	{/if}
 </header>
 
 <style lang="postcss">
-	header {
+	header,
+	.sub {
 		background-color: var(--color-background);
 	}
 
-	header,
-	.left {
+	.inner,
+	.left,
+	.sub {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 
 		gap: 12px;
+	}
+
+	.sub {
+		gap: 0px;
+	}
+
+	.coffee {
+		display: none;
+
+		@media (--md) {
+			display: block;
+		}
 	}
 
 	.left {
@@ -57,25 +71,5 @@
 
 	.logo {
 		padding: 8px;
-	}
-
-	form {
-		width: 100%;
-	}
-
-	input {
-		all: unset;
-		width: 100%;
-
-		padding: 2px 0;
-		font-size: var(--font-size-sm);
-		letter-spacing: var(--font-letter-spacing-spaced);
-		font-weight: var(--font-weight-medium);
-		text-transform: uppercase;
-
-		&::placeholder {
-			color: var(--color-foreground);
-			opacity: 0.4;
-		}
 	}
 </style>
