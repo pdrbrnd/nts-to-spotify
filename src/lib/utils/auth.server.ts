@@ -1,7 +1,6 @@
 import { env } from '$env/dynamic/private';
 import { env as publicEnv } from '$env/dynamic/public';
 import { error } from '@sveltejs/kit';
-import { SPOTIFY_REDIRECT_URI } from '$lib/constants';
 import type { RequestEvent } from '@sveltejs/kit';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '$lib/constants';
 
@@ -61,7 +60,7 @@ export const requestTokens = async (code: string) => {
 		body: new URLSearchParams({
 			grant_type: 'authorization_code',
 			code,
-			redirect_uri: SPOTIFY_REDIRECT_URI
+			redirect_uri: env.PUBLIC_SPOTIFY_REDIRECT_URI || ''
 		}),
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
-	import { SPOTIFY_REDIRECT_URI, SPOTIFY_SCOPES } from '$lib/constants';
+	import { SPOTIFY_SCOPES } from '$lib/constants';
 
 	import Button from './button.svelte';
 
@@ -12,7 +12,7 @@
 	{variant}
 	href={`https://accounts.spotify.com/authorize?${new URLSearchParams({
 		client_id: env.PUBLIC_SPOTIFY_CLIENT_ID,
-		redirect_uri: SPOTIFY_REDIRECT_URI,
+		redirect_uri: env.PUBLIC_SPOTIFY_REDIRECT_URI,
 		scope: SPOTIFY_SCOPES,
 		response_type: 'code'
 	}).toString()}`}
