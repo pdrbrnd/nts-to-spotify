@@ -60,7 +60,7 @@ export const requestTokens = async (code: string) => {
 		body: new URLSearchParams({
 			grant_type: 'authorization_code',
 			code,
-			redirect_uri: env.PUBLIC_SPOTIFY_REDIRECT_URI || ''
+			redirect_uri: publicEnv.PUBLIC_SPOTIFY_REDIRECT_URI
 		}),
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',

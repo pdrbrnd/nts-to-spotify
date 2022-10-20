@@ -52,7 +52,7 @@
 	};
 
 	onMount(() => {
-		interval = setInterval(fetchNext, 1000);
+		interval = setInterval(fetchNext, 500);
 	});
 
 	onDestroy(() => clearInterval(interval));
