@@ -3,6 +3,7 @@
 
 	export let as: 'button' | 'a' = 'button';
 	export let variant: 'solid' | 'ghost' | 'outline' = 'solid';
+	export let size: 'md' | 'sm' = 'md';
 	export let icon: Icon['$$prop_def']['icon'] | undefined = undefined;
 	export let iconPosition: 'left' | 'right' | undefined = undefined;
 	export let disabled: boolean = false;
@@ -13,10 +14,12 @@
 	this={as}
 	on:click
 	class={variant}
+	class:small={size === 'sm'}
 	aria-disabled={disabled}
 	class:disabled
 	class:icon-right={iconPosition === 'right'}
 	class:loading
+	class:only-icon={!$$slots.default}
 	{...$$restProps}
 >
 	<span>
@@ -104,8 +107,17 @@
 			border: 1px solid var(--button-color);
 		}
 
+		&.small {
+			padding: 0px 6px;
+			height: 32px;
+		}
+
 		&.icon-right {
 			flex-direction: row-reverse;
+		}
+
+		&.only-icon {
+			aspect-ratio: 1 / 1;
 		}
 
 		&.loading {

@@ -18,7 +18,9 @@
 	});
 
 	const handleSubmit = () => {
-		goto(ntsUrlToRouteUrl(value));
+		if (value) {
+			goto(ntsUrlToRouteUrl(value));
+		}
 	};
 </script>
 

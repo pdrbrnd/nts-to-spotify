@@ -8,3 +8,5 @@ export { default as Logo } from './logo.svelte';
 export { default as Panel } from './panel.svelte';
 export { default as UrlInput } from './url-input.svelte';
 export { default as UserAvatar } from './user-avatar.svelte';
+export { default as Checkbox } from './checkbox.svelte';
+export { default as Track } from './track.svelte';

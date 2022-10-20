@@ -17,12 +17,6 @@
 	section {
 		margin-top: 30vh;
 
-		padding: 24px;
-		width: min(100%, 530px);
-
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 24px;
+		width: min(100%, 550px);
 	}
 </style>
