@@ -27,32 +27,50 @@
 
 	let interval: NodeJS.Timer;
 
+	let fetching: number[] = [];
+
 	const fetchNext = async () => {
-		const next = tracks.find((t) => t.matches === undefined);
+		const index = tracks.findIndex((t, i) => t.matches === undefined && !fetching.includes(i));
 
-		if (!next) return clearInterval(interval);
+		if (index < 0) return clearInterval(interval);
 
-		const res = await fetch(`/api/spotify/search?artist=${next.artist}&title=${next.title}`);
-		const result = (await res.json()) as SpotifyTrackSearchResult;
-		const matches = result.tracks.items.map((item) => ({
-			artist: item.artists[0].name,
-			title: item.name,
-			uri: item.uri,
-			preview: item.preview_url || undefined,
-			cover: item.album.images[0].url
-		}));
-		next.matches = matches;
-		if (matches.length > 0) {
-			next.checked = true;
-			next.selectedMatch = matches[0].uri;
+		const track = tracks[index];
+		fetching.push(index);
+
+		try {
+			const res = await fetch(`/api/spotify/search?artist=${track.artist}&title=${track.title}`);
+
+			if (!res.ok)
+				throw new Error(`Error fetching song details for ${track.artist} - ${track.title}`);
+
+			const result = (await res.json()) as SpotifyTrackSearchResult;
+
+			const matches = result.tracks.items.map((item) => ({
+				artist: item.artists[0].name,
+				title: item.name,
+				uri: item.uri,
+				preview: item.preview_url || undefined,
+				cover: item.album.images[0].url
+			}));
+
+			track.matches = matches;
+
+			if (matches.length > 0) {
+				track.checked = true;
+				track.selectedMatch = matches[0].uri;
+			}
+
+			// trigger reactivity
+			tracks = tracks;
+		} catch (error) {
+			// noop. we'll just try again
+		} finally {
+			fetching = [...fetching.filter((n) => n !== index)];
 		}
-
-		// trigger reactivity
-		tracks = tracks;
 	};
 
 	onMount(() => {
-		interval = setInterval(fetchNext, 500);
+		interval = setInterval(fetchNext, 50);
 	});
 
 	onDestroy(() => clearInterval(interval));
