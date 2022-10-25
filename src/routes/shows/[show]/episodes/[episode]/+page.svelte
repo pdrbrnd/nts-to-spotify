@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { Badge, Button, Divider, Panel } from '$components';
+	import ImportToSpotify from '$components/import-to-spotify.svelte';
 	import Track from '$components/track.svelte';
 	import type { Match, SpotifyTrackSearchResult, URI } from '$lib/types';
 	import { onDestroy, onMount } from 'svelte';
@@ -23,7 +24,10 @@
 		checked: false
 	}));
 
-	$: amount = tracks.filter((t) => t.checked).length;
+	let selectedTracks: string[];
+	$: selectedTracks = tracks
+		.filter((t) => t.checked && t.selectedMatch)
+		.map((t) => t.selectedMatch as string);
 
 	let interval: NodeJS.Timer;
 
@@ -76,7 +80,7 @@
 	onDestroy(() => clearInterval(interval));
 </script>
 
-<Panel>
+<Panel padded={false}>
 	<article>
 		<header>
 			<h1 class="font-title">{data.title}</h1>
@@ -100,17 +104,26 @@
 			<p class="font-small-beast">No tracks available</p>
 		{/if}
 	</article>
-	<footer data-theme="dark">
-		<p class="font-small-beast">{amount} Selected tracks</p>
-		<Button icon="spotify" disabled={tracks.some((t) => t.matches === undefined)}
-			>Import to Spotify</Button
-		>
-	</footer>
+	<ImportToSpotify
+		disabled={tracks.some((t) => t.matches === undefined)}
+		data={{
+			title: data.title,
+			description: data.description,
+			date: data.date,
+			cover: data.cover,
+			tracks: selectedTracks
+		}}
+	/>
 </Panel>
 
 <style lang="postcss">
 	header {
 		padding: 24px;
+
+		@media (--md) {
+			padding: 40px;
+			padding-bottom: 24px;
+		}
 
 		display: flex;
 		flex-direction: column;
@@ -131,28 +144,6 @@
 	}
 
 	article {
-		padding-bottom: calc(44px + 24px);
-	}
-
-	footer {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-
-		height: 44px;
-
-		border: 1px solid var(--color-background);
-		box-sizing: content-box;
-
-		position: fixed;
-		bottom: 0;
-		left: 0;
-		width: 100%;
-
-		background-color: var(--color-background);
-
-		& p {
-			padding: 8px;
-		}
+		padding-bottom: calc(44px + 40px);
 	}
 </style>

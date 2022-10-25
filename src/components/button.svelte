@@ -13,6 +13,8 @@
 <svelte:element
 	this={as}
 	on:click
+	on:mouseenter
+	on:mouseleave
 	class={variant}
 	class:small={size === 'sm'}
 	aria-disabled={disabled}

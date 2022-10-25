@@ -10,3 +10,4 @@ export { default as UrlInput } from './url-input.svelte';
 export { default as UserAvatar } from './user-avatar.svelte';
 export { default as Checkbox } from './checkbox.svelte';
 export { default as Track } from './track.svelte';
+export { default as ImportToSpotify } from './import-to-spotify.svelte';

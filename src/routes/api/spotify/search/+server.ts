@@ -11,7 +11,7 @@ export const GET: RequestHandler = async (event) => {
 
 	const token = await getAccessToken(event);
 
-	const res = await fetch(
+	const res = await event.fetch(
 		`https://api.spotify.com/v1/search?type=track&q=artist:${artist} track:${title}`,
 		{
 			headers: {

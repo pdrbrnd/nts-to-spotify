@@ -22,7 +22,7 @@ export const getNTSData = ($: CheerioAPI) => {
 	const date = $('#episode-broadcast-date').text().replace(',', '').replaceAll('.', '-').trim();
 
 	// Cover image
-	const cover = $('meta[property="og:image"]').attr('content');
+	const cover = $('meta[property="og:image"]').attr('content') || '';
 
 	// Genres
 	const genres: string[] = [];

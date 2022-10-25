@@ -68,6 +68,10 @@
 
 		padding: 12px 24px;
 
+		@media (--md) {
+			padding: 12px 40px;
+		}
+
 		width: 100%;
 		justify-content: space-between;
 		gap: 16px;

@@ -49,8 +49,6 @@
 
 <style lang="postcss">
 	.panel {
-		padding: 32px;
-
 		display: flex;
 		flex-direction: column;
 		align-items: flex-start;

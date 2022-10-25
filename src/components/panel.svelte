@@ -1,5 +1,9 @@
+<script lang="ts">
+	export let padded: boolean = true;
+</script>
+
 <div>
-	<section data-theme="light">
+	<section class:padded data-theme="light">
 		<slot />
 	</section>
 </div>
@@ -18,5 +22,14 @@
 		margin-top: 30vh;
 
 		width: min(100%, 550px);
+	}
+
+	.padded {
+		padding: 24px;
+
+		@media (--md) {
+			padding: 40px;
+			padding-bottom: 24px;
+		}
 	}
 </style>

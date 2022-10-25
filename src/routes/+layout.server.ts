@@ -7,7 +7,7 @@ export const load: LayoutServerLoad = async (event) => {
 
 	if (!token) return { user: null };
 
-	const res = await fetch('https://api.spotify.com/v1/me', {
+	const res = await event.fetch('https://api.spotify.com/v1/me', {
 		headers: {
 			Authorization: `Bearer ${token}`
 		}
