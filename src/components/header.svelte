@@ -2,12 +2,11 @@
 	import Logo from './logo.svelte';
 	import UserAvatar from './user-avatar.svelte';
 
-	import type { User } from '$lib/types';
 	import Button from './button.svelte';
 	import UrlInput from './url-input.svelte';
-	import { getContext } from 'svelte';
+	import { page } from '$app/stores';
 
-	const me = getContext<User>('me');
+	const me = $page.data.user;
 </script>
 
 <header>

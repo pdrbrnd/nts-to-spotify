@@ -1,9 +1,8 @@
 <script lang="ts">
-	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 	import { Button } from '$components';
-	import type { User } from '$lib/types';
 	import { drawCover, CANVAS_SIZE } from '$lib/utils/canvas';
-	import { getContext, onDestroy } from 'svelte';
+	import { onDestroy } from 'svelte';
 
 	export let disabled: boolean = false;
 	export let data: {
@@ -23,7 +22,7 @@
 		if (ctx) drawCover(ctx, data);
 	}
 
-	const me = getContext<User>('me');
+	const me = $page.data.user;
 
 	let creating: boolean;
 	let success: boolean;

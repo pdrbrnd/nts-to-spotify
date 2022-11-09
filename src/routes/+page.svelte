@@ -1,9 +1,8 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { Button, Divider, LoginWithSpotify, Logo, Panel } from '$components';
-	import type { User } from '$lib/types';
-	import { getContext } from 'svelte';
 
-	const me = getContext<User>('me');
+	const me = $page.data.user;
 </script>
 
 {#if !me?.id}

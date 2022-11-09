@@ -1,13 +1,12 @@
 <script lang="ts">
 	import LoginWithSpotify from './login-with-spotify.svelte';
 	import Button from './button.svelte';
-	import { getContext } from 'svelte';
-	import type { User } from '$lib/types';
 	import { clickOutside } from '$lib/actions/clickoutside';
+	import { page } from '$app/stores';
 
 	let isLoggingOut = false;
 
-	const me = getContext<User>('me');
+	const me = $page.data.user;
 </script>
 
 {#if me?.id}

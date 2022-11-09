@@ -1,8 +1,7 @@
 <script lang="ts">
 	import '$styles/index.pcss';
 	import { page } from '$app/stores';
-	import { onMount, setContext } from 'svelte';
-	import type { LayoutData } from './$types';
+	import { onMount } from 'svelte';
 	import { Header } from '$components';
 
 	const images = [
@@ -20,10 +19,6 @@
 	onMount(() => {
 		image = images[Math.floor(Math.random() * 100) % images.length];
 	});
-
-	export let data: LayoutData;
-
-	setContext('me', data.user);
 </script>
 
 <svelte:head>
