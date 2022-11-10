@@ -4,6 +4,12 @@
 
 	import Button from './button.svelte';
 	import UrlInput from './url-input.svelte';
+	import { afterNavigate, beforeNavigate } from '$app/navigation';
+
+	let navigating = false;
+
+	beforeNavigate(() => (navigating = true));
+	afterNavigate(() => (navigating = false));
 </script>
 
 <header>
@@ -12,6 +18,9 @@
 			<a href="/" class="logo">
 				<Logo />
 			</a>
+			{#if navigating}
+				<div class="spinner" />
+			{/if}
 		</div>
 		<div class="right">
 			<UserAvatar />
@@ -32,6 +41,18 @@
 </header>
 
 <style lang="postcss">
+	.spinner {
+		display: block;
+		width: 14px;
+		height: 14px;
+		border-radius: 100%;
+		border-width: 2px;
+		border-style: solid;
+		border-color: var(--button-color);
+		border-bottom-color: transparent;
+		animation: rotate360 1s linear infinite;
+	}
+
 	header,
 	.sub {
 		background-color: var(--color-background);
@@ -57,10 +78,6 @@
 		@media (--md) {
 			display: block;
 		}
-	}
-
-	.left {
-		flex: 1;
 	}
 
 	.logo {
