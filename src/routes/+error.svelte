@@ -1,26 +1,26 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import Button from '$components/button.svelte';
-	import Panel from '$components/panel.svelte';
 </script>
 
-<Panel>
-	<div>
-		<h1 class="font-title">{$page.status}</h1>
-
-		{#if $page.error?.message}
-			<p class="font-small-beast">{$page.error.message}</p>
-		{/if}
-
-		<Button as="a" href="/">Take me home, John Denver</Button>
-	</div>
-</Panel>
+<div data-theme="dark">
+	<h1>{$page.status}</h1>
+</div>
 
 <style lang="postcss">
 	div {
+		flex: 1;
+
 		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		gap: 24px;
+		align-items: center;
+		justify-content: center;
+
+		background-color: transparent;
+	}
+
+	h1 {
+		font-size: 60vh;
+		line-height: 1;
+		font-weight: var(--font-weight-bold);
+		color: var(--color-foreground);
 	}
 </style>
