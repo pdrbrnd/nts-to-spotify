@@ -54,7 +54,7 @@ type RefreshTokenResponse = AccessTokenResponse & {
 	refresh_token: string;
 };
 
-export const requestTokens = async (code: string) => {
+export const startUserSession = async (event: RequestEvent, code: string) => {
 	const res = await fetch('https://accounts.spotify.com/api/token', {
 		method: 'POST',
 		body: new URLSearchParams({
@@ -72,7 +72,9 @@ export const requestTokens = async (code: string) => {
 
 	if (!res.ok) throw error(401, 'Not authorized');
 
-	return (await res.json()) as RefreshTokenResponse;
+	const data: RefreshTokenResponse = await res.json();
+
+	setCookies(event, data);
 };
 
 export const rotateAccessToken = async (refreshToken: string) => {

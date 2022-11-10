@@ -42,7 +42,7 @@
 		fetching.push(index);
 
 		try {
-			const res = await fetch(`/api/spotify/search?artist=${track.artist}&title=${track.title}`);
+			const res = await fetch(`/api/spotify/search?artist=${track.artist}&track=${track.title}`);
 
 			if (!res.ok)
 				throw new Error(`Error fetching song details for ${track.artist} - ${track.title}`);
