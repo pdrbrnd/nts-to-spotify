@@ -1,5 +1,5 @@
 export const CANVAS_SIZE = 800;
-const FONT_SIZE = 80;
+const FONT_SIZE = 70;
 const LINE_HEIGHT = FONT_SIZE * 1.15;
 const PADDING = 40;
 
@@ -48,7 +48,7 @@ const drawInfo = (
 ) => {
 	// title
 	let y = 0;
-	ctx.font = `600 ${FONT_SIZE}px Oswald`;
+	ctx.font = `900 semi-condensed ${FONT_SIZE}px Mona Sans`;
 	const lines = wrapWords(ctx, data.title.toUpperCase(), CANVAS_SIZE - PADDING * 2);
 	[...lines, data.date].forEach((line, i) => {
 		y = PADDING + LINE_HEIGHT * (i + 1);
@@ -69,7 +69,7 @@ export const drawCover = (
 	data: { cover: string; title: string; date: string }
 ) => {
 	const img = new Image();
-	img.src = data.cover;
+	img.crossOrigin = 'anonymous';
 	img.onload = () => {
 		const multiplier = CANVAS_SIZE / Math.min(img.width, img.height);
 		const width = img.width * multiplier;
@@ -82,4 +82,9 @@ export const drawCover = (
 
 		drawInfo(ctx, data);
 	};
+	img.onerror = () => {
+		ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
+		drawInfo(ctx, data);
+	};
+	img.src = data.cover;
 };

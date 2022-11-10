@@ -36,6 +36,7 @@
 
 		border-radius: 100%;
 
+		background-color: hsla(var(--color-foreground-hsl) / 0.2);
 		background-size: cover;
 		background-repeat: no-repeat;
 		background-position: center center;
