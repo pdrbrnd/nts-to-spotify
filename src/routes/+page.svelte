@@ -1,5 +1,8 @@
 <script lang="ts">
+	import { page } from '$app/stores';
 	import { Button, Divider, LoginWithSpotify, Logo, Panel } from '$components';
+
+	const me = $page.data.user;
 </script>
 
 <Panel>
@@ -28,7 +31,9 @@
 			<li>Login with Spotify to be able to import the playlist</li>
 		</ol>
 
-		<LoginWithSpotify />
+		{#if !me}
+			<LoginWithSpotify />
+		{/if}
 
 		<Divider />
 
