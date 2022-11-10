@@ -48,7 +48,7 @@ const drawInfo = (
 ) => {
 	// title
 	let y = 0;
-	ctx.font = `900 semi-condensed ${FONT_SIZE}px Mona Sans`;
+	ctx.font = `600 ${FONT_SIZE}px Oswald`;
 	const lines = wrapWords(ctx, data.title.toUpperCase(), CANVAS_SIZE - PADDING * 2);
 	[...lines, data.date].forEach((line, i) => {
 		y = PADDING + LINE_HEIGHT * (i + 1);

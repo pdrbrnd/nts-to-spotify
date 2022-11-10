@@ -63,9 +63,9 @@
 		font-size: var(--font-size-sm);
 		font-weight: var(--font-weight-medium);
 		letter-spacing: var(--font-letter-spacing-spaced);
-		line-height: var(--font-line-height-sm);
 		text-transform: uppercase;
 
+		line-height: 44px;
 		height: 44px;
 		width: 100%;
 		margin: 0;
