@@ -5,7 +5,9 @@ module.exports = {
 				flexbox: 'no-2009'
 			},
 			features: {
-				'custom-media-queries': true,
+				'custom-media-queries': {
+					importFrom: ['./src/styles/media.pcss']
+				},
 				'nesting-rules': true,
 				'custom-properties': false
 			}
