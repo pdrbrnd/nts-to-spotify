@@ -5,10 +5,14 @@
 	import type { LayoutData } from './$types';
 
 	export let data: LayoutData;
+	$: title = $page.data.title ? `${$page.data.title} | NTS to Spotify` : 'NTS to Spotify';
 </script>
 
 <svelte:head>
-	<title>{$page.data.title || 'NTS to Spotify'}</title>
+	<title>{title}</title>
+	<meta name="description" content="Convert NTS Episodes into Spotify Playlists" />
+	<meta name="og:title" content={title} />
+	<meta name="og:image" content="/og.jpg" />
 </svelte:head>
 
 <div class="holder" style={`background-image: url(${$page.data?.cover || data.bgImage})`}>
