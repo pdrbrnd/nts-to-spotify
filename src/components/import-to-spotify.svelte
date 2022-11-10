@@ -3,6 +3,7 @@
 	import { Button } from '$components';
 	import { drawCover, CANVAS_SIZE } from '$lib/utils/canvas';
 	import { onDestroy } from 'svelte';
+	import LoginWithSpotify from './login-with-spotify.svelte';
 
 	export let disabled: boolean = false;
 	export let data: {
@@ -64,16 +65,20 @@
 		{#if success}
 			<p class="font-small-beast">Imported!</p>
 		{/if}
-		<Button
-			as="button"
-			href="asdfads"
-			icon="spotify"
-			disabled={disabled || creating}
-			loading={creating}
-			on:click={handleClick}
-			on:mouseenter={() => (showCover = true)}
-			on:mouseleave={() => (showCover = false)}>Import to Spotify</Button
-		>
+		{#if me?.id}
+			<Button
+				as="button"
+				href="asdfads"
+				icon="spotify"
+				disabled={disabled || creating}
+				loading={creating}
+				on:click={handleClick}
+				on:mouseenter={() => (showCover = true)}
+				on:mouseleave={() => (showCover = false)}>Import to Spotify</Button
+			>
+		{:else}
+			<LoginWithSpotify label="Login to import" />
+		{/if}
 	</div>
 	{#if showCover}
 		<canvas bind:this={canvas} width={CANVAS_SIZE} height={CANVAS_SIZE} />

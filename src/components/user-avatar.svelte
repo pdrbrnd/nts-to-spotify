@@ -19,7 +19,7 @@
 					isLoggingOut = true;
 				}
 			}}
-			href={isLoggingOut ? '/api/auth/logout' : undefined}
+			href={isLoggingOut ? '/logout' : undefined}
 		>
 			<p class="font-small-beast">{isLoggingOut ? 'Logout' : me.display_name}</p>
 			<div class="avatar" style="background-image: url({me.images[0]?.url})" />
