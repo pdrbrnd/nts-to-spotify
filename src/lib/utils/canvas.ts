@@ -69,7 +69,6 @@ export const drawCover = (
 	data: { cover: string; title: string; date: string }
 ) => {
 	const img = new Image();
-	img.crossOrigin = 'anonymous';
 	img.onload = () => {
 		const multiplier = CANVAS_SIZE / Math.min(img.width, img.height);
 		const width = img.width * multiplier;
@@ -86,5 +85,5 @@ export const drawCover = (
 		ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 		drawInfo(ctx, data);
 	};
-	img.src = data.cover;
+	img.src = `/cover?url=${data.cover}`;
 };

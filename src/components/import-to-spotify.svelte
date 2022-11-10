@@ -49,6 +49,7 @@
 			successTimeout = setTimeout(() => (success = false), 5000);
 		} catch (error) {
 			// noop for now
+			console.error(error);
 		} finally {
 			creating = false;
 		}
