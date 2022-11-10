@@ -67,7 +67,7 @@
 	}
 
 	.disclaimer {
-		background-color: palegoldenrod;
+		background-color: lightgoldenrodyellow;
 		border: 1px solid var(--color-foreground);
 		padding: 8px;
 
