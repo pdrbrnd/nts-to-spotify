@@ -1,5 +1,4 @@
 import { env } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
 import { error } from '@sveltejs/kit';
 import type { RequestEvent } from '@sveltejs/kit';
 import { ACCESS_TOKEN_KEY, REFRESH_TOKEN_KEY } from '$lib/constants';
@@ -60,12 +59,12 @@ export const startUserSession = async (event: RequestEvent, code: string) => {
 		body: new URLSearchParams({
 			grant_type: 'authorization_code',
 			code,
-			redirect_uri: publicEnv.PUBLIC_SPOTIFY_REDIRECT_URI
+			redirect_uri: `${event.url.origin}/login`
 		}),
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			Authorization: `Basic ${Buffer.from(
-				`${publicEnv.PUBLIC_SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
+				`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
 			).toString('base64')}`
 		}
 	});
@@ -87,7 +86,7 @@ export const rotateAccessToken = async (refreshToken: string) => {
 		headers: {
 			'Content-Type': 'application/x-www-form-urlencoded',
 			Authorization: `Basic ${Buffer.from(
-				`${publicEnv.PUBLIC_SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
+				`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
 			).toString('base64')}`
 		}
 	});

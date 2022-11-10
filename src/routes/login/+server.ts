@@ -1,6 +1,8 @@
-import { redirect, error } from '@sveltejs/kit';
+import { redirect } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { startUserSession } from '$lib/utils/auth.server';
+import { SPOTIFY_SCOPES } from '$lib/constants';
+import { env } from '$env/dynamic/private';
 
 export const GET: RequestHandler = async (event) => {
 	const code = event.url.searchParams.get('code');
@@ -13,6 +15,15 @@ export const GET: RequestHandler = async (event) => {
 
 		throw redirect(307, path);
 	} else {
-		throw error(400, `'code' is required`);
+		throw redirect(
+			307,
+			`https://accounts.spotify.com/authorize?${new URLSearchParams({
+				client_id: env.SPOTIFY_CLIENT_ID || '',
+				redirect_uri: `${event.url.origin}/login`,
+				scope: SPOTIFY_SCOPES,
+				state: event.request.headers.get('referer')?.replace(event.url.origin, '') || '',
+				response_type: 'code'
+			}).toString()}`
+		);
 	}
 };

@@ -1,5 +1,4 @@
 import { env } from '$env/dynamic/private';
-import { env as publicEnv } from '$env/dynamic/public';
 import type { CheerioAPI } from 'cheerio';
 
 export const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -14,7 +13,7 @@ export const getClientCredentials = async () => {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 				Authorization: `Basic ${Buffer.from(
-					`${publicEnv.PUBLIC_SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
+					`${env.SPOTIFY_CLIENT_ID}:${env.SPOTIFY_CLIENT_SECRET}`
 				).toString('base64')}`
 			}
 		});
