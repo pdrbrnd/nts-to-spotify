@@ -16,6 +16,8 @@ export const load: LayoutServerLoad = async (event) => {
 		}
 	});
 
+	if (!res.ok) return { user: null, bgImage };
+
 	return {
 		user: (await res.json()) as User,
 		bgImage

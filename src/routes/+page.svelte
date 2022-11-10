@@ -10,12 +10,12 @@
 		<p class="font-base">Create Spotify playlists from NTS episodes.</p>
 
 		<div class="disclaimer font-small-beast">
-			<h4>Disclaimer</h4>
-			<p>
+			<h4 class="font-base">Disclaimer</h4>
+			<p class="font-base">
 				This is a community-created app to create Spotify Playlists from NTS episodes. We're not
 				affiliated with NTS in any way.
 			</p>
-			<p>
+			<p class="font-base">
 				<a href="https://nts.live" target="_blank" rel="noopener noreferrer">
 					Click here to go to NTS.live
 				</a>
@@ -33,7 +33,7 @@
 		<Divider />
 
 		<div>
-			<p class="support">Support the project</p>
+			<p class="support font-base">Support the project</p>
 			<Button
 				as="a"
 				variant="outline"
