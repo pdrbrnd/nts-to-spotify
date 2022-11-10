@@ -9,16 +9,24 @@
 
 		<p class="font-base">Create Spotify playlists from NTS episodes.</p>
 
+		<div class="disclaimer font-small-beast">
+			<h4>Disclaimer</h4>
+			<p>
+				This is a community-created app to create Spotify Playlists from NTS episodes. We're not
+				affiliated with NTS in any way.
+			</p>
+			<p>
+				<a href="https://nts.live" target="_blank" rel="noopener noreferrer">
+					Click here to go to NTS.live
+				</a>
+			</p>
+		</div>
+
 		<ol class="font-base">
 			<li>Paste the NTS episode URL into the top bar</li>
 			<li>Preview and manage your tracklist</li>
 			<li>Login with Spotify to be able to import the playlist</li>
 		</ol>
-
-		<p class="font-base">
-			Alternatively, open any NTS episode and change the URL from nts.live to ntstospotify.com to
-			start the process!
-		</p>
 
 		<LoginWithSpotify />
 
@@ -56,5 +64,25 @@
 
 	.support {
 		margin-bottom: 8px;
+	}
+
+	.disclaimer {
+		background-color: palegoldenrod;
+		border: 1px solid var(--color-foreground);
+		padding: 8px;
+
+		& h4,
+		& a {
+			font-weight: var(--font-weight-medium);
+		}
+
+		& h4,
+		& p:not(:last-child) {
+			margin-bottom: 8px;
+		}
+
+		& a {
+			text-decoration: underline;
+		}
 	}
 </style>

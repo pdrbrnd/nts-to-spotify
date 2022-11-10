@@ -1,31 +1,17 @@
 <script lang="ts">
 	import '$styles/index.pcss';
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	import { Header } from '$components';
+	import type { LayoutData } from './$types';
 
-	const images = [
-		'/bg1.jpg',
-		'/bg2.jpg',
-		'/bg3.jpg',
-		'/bg4.jpg',
-		'/bg5.jpg',
-		'/bg6.jpg',
-		'/bg7.jpg'
-	];
-
-	let image = '';
-
-	onMount(() => {
-		image = images[Math.floor(Math.random() * 100) % images.length];
-	});
+	export let data: LayoutData;
 </script>
 
 <svelte:head>
 	<title>{$page.data.title || 'NTS to Spotify'}</title>
 </svelte:head>
 
-<div class="holder" style={image ? `background-image: url(${$page.data?.cover || image})` : ''}>
+<div class="holder" style={`background-image: url(${$page.data?.cover || data.bgImage})`}>
 	<Header />
 	<main>
 		<slot />
