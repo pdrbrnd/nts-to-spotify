@@ -76,7 +76,7 @@ export const drawCover = (
 		ctx.drawImage(img, (CANVAS_SIZE - width) / 2, (CANVAS_SIZE - height) / 2, width, height);
 
 		// overlay
-		ctx.fillStyle = 'rgba(0, 0, 0, 0.2)';
+		ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
 		ctx.fillRect(0, 0, CANVAS_SIZE, CANVAS_SIZE);
 
 		drawInfo(ctx, data);
