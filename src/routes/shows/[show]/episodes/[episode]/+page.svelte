@@ -46,11 +46,11 @@
 			<Divider />
 		</header>
 		{#if tracks.length > 0}
-			<ul>
+			<div class="list">
 				{#each tracks as { artist, title, matches, selectedMatch, checked }, i}
 					<Track bind:checked bind:selectedMatch original={{ artist, title }} {matches} />
 				{/each}
-			</ul>
+			</div>
 		{:else}
 			<p class="font-small-beast">No tracks available</p>
 		{/if}
@@ -88,7 +88,7 @@
 		gap: 8px;
 	}
 
-	ul {
+	.list {
 		display: flex;
 		flex-direction: column;
 
@@ -97,6 +97,14 @@
 
 		& > :global(*) {
 			padding-block: 8px;
+
+			transition: background-color var(--transition-appearance);
+
+			@media (hover: hover) {
+				&:hover {
+					background-color: hsla(var(--color-foreground-hsl) / 0.03);
+				}
+			}
 		}
 	}
 
