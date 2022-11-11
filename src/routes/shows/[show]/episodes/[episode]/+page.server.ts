@@ -5,13 +5,22 @@ import { error } from '@sveltejs/kit';
 import type { Match, SpotifyTrackSearchResult } from '$lib/types';
 import { getClientCredentials, getNTSData, sleep } from './utils.server';
 
-const fetchNext = async (
-	token: string,
-	artist: string,
-	title: string
-): Promise<{ artist: string; title: string; matches: Match[] }> => {
+const fetchNext = async ({
+	token,
+	artist,
+	title,
+	retry
+}: {
+	token: string;
+	artist: string;
+	title: string;
+	retry?: boolean;
+}): Promise<{ artist: string; title: string; matches: Match[]; retry?: boolean }> => {
+	// if it's a retry, let's try to fetch without the artist name
 	const res = await fetch(
-		`https://api.spotify.com/v1/search?type=track&q=artist:${artist} track:${title}`,
+		`https://api.spotify.com/v1/search?type=track&q=${
+			!retry ? `artist:${artist}` : ''
+		} track:${title}`,
 		{
 			headers: {
 				'Content-Type': 'application/json',
@@ -22,10 +31,14 @@ const fetchNext = async (
 
 	if (res.status === 429) {
 		await sleep(Number(res.headers.get('Retry-After') || 1) * 1000);
-		return fetchNext(token, artist, title);
+		return fetchNext({ token, artist, title });
 	}
 
 	const result = (await res.json()) as SpotifyTrackSearchResult;
+
+	if ((result.tracks?.items || []).length === 0 && !retry) {
+		return fetchNext({ token, artist, title, retry: true });
+	}
 
 	const matches = (result.tracks?.items || []).map((item) => ({
 		artist: item.artists[0].name,
@@ -35,7 +48,7 @@ const fetchNext = async (
 		cover: item.album.images[0].url
 	}));
 
-	return { artist, title, matches };
+	return { artist, title, matches, retry };
 };
 
 export const load: PageServerLoad = async ({ params, fetch }) => {
@@ -56,7 +69,7 @@ export const load: PageServerLoad = async ({ params, fetch }) => {
 		if (!token) throw error(401, 'Not authorized');
 
 		const tracks = await Promise.all(
-			data.tracks.map(({ artist, title }) => fetchNext(token, artist, title))
+			data.tracks.map(({ artist, title }) => fetchNext({ token, title, artist }))
 		);
 
 		return {

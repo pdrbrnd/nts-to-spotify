@@ -1,6 +1,7 @@
 <script lang="ts">
 	import type { BasicTrack, Match, URI } from '$lib/types';
 	import { slide } from 'svelte/transition';
+	import Badge from './badge.svelte';
 	import Button from './button.svelte';
 	import Checkbox from './checkbox.svelte';
 	import Song from './song.svelte';
@@ -17,15 +18,20 @@
 </script>
 
 <div class="root">
+	<div class="original font-tiny">
+		{original.artist} - {original.title}
+	</div>
 	<div class="row" class:no-action={matches === undefined || hasNoMatch}>
-		<Song
-			artist={match?.artist || original.artist}
-			title={match?.title || original.title}
-			preview={match?.preview}
-			cover={match ? { type: 'spotify', src: match.cover } : { type: 'nts' }}
-			loading={matches === undefined}
-			disabled={!!hasNoMatch}
-		/>
+		<div>
+			<Song
+				artist={match?.artist || original.artist}
+				title={match?.title || original.title}
+				preview={match?.preview}
+				cover={match ? { type: 'spotify', src: match.cover } : { type: 'nts' }}
+				loading={matches === undefined}
+				disabled={!!hasNoMatch}
+			/>
+		</div>
 		<div class="right">
 			{#if matches && matches.length > 1}
 				<Button
@@ -62,15 +68,28 @@
 </div>
 
 <style lang="postcss">
-	.row {
-		display: flex;
-		align-items: center;
-
+	.row,
+	.original {
 		padding: 12px 24px;
 
 		@media (--md) {
 			padding: 12px 40px;
 		}
+	}
+
+	.original {
+		padding-bottom: 8px;
+		counter-increment: track;
+		opacity: 0.5;
+
+		&::before {
+			content: counter(track) '. ';
+		}
+	}
+
+	.row {
+		display: flex;
+		align-items: center;
 
 		width: 100%;
 		justify-content: space-between;

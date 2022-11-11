@@ -18,7 +18,7 @@
 	</svg>
 {:else}
 	<div class="root">
-		<img src={src.src || ''} alt="" />
+		<img class="cover" src={src.src || ''} alt="" />
 		<svg
 			class="spotify"
 			width="16"
@@ -42,7 +42,7 @@
 		flex-shrink: 0;
 	}
 
-	img {
+	.cover {
 		width: 32px;
 		height: 32px;
 		object-fit: cover;

@@ -38,6 +38,8 @@
 <style lang="postcss">
 	a,
 	button {
+		--button-size: 44px;
+
 		all: unset;
 
 		position: relative;
@@ -63,7 +65,7 @@
 		user-select: none;
 
 		padding: 0px 10px;
-		height: 44px;
+		height: var(--button-size);
 		box-sizing: border-box;
 
 		transition: opacity var(--transition-appearance), box-shadow var(--transition-smooth);
@@ -111,7 +113,7 @@
 
 		&.small {
 			padding: 0px 6px;
-			height: 32px;
+			--button-size: 32px;
 		}
 
 		&.icon-right {
@@ -119,7 +121,7 @@
 		}
 
 		&.only-icon {
-			aspect-ratio: 1 / 1;
+			width: var(--button-size);
 		}
 
 		&.loading {

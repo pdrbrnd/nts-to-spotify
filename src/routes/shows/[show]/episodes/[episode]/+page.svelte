@@ -15,13 +15,13 @@
 		checked: boolean;
 	};
 
-	let tracks: Track[] = data.tracks.map(({ artist, title, matches }) => {
+	let tracks: Track[] = data.tracks.map(({ artist, title, matches, retry }) => {
 		return {
 			artist,
 			title,
 			matches,
 			selectedMatch: matches.length > 0 ? matches[0].uri : null,
-			checked: matches.length > 0
+			checked: matches.length > 0 && !retry
 		};
 	});
 
@@ -93,6 +93,11 @@
 		flex-direction: column;
 
 		width: 100%;
+		counter-reset: track;
+
+		& > :global(*) {
+			padding-block: 8px;
+		}
 	}
 
 	article {
