@@ -42,13 +42,14 @@
 			&:before {
 				--checkmark-border-color: var(--color-foreground);
 				content: '';
-				width: 12px;
+				width: 4px;
 				height: 0px;
 
 				border-left: 2px solid var(--checkmark-border-color);
 				border-bottom: 2px solid var(--checkmark-border-color);
 
-				transition: height var(--transition-motion), transform var(--transition-motion);
+				transition: width var(--transition-motion), height var(--transition-motion),
+					transform var(--transition-motion);
 			}
 		}
 
@@ -67,6 +68,7 @@
 
 			&:before {
 				--checkmark-border-color: var(--color-background);
+				width: 12px;
 				height: 6px;
 				transform: rotate(-45deg);
 			}
