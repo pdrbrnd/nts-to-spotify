@@ -1,7 +1,5 @@
 <script lang="ts">
-	import { Badge, Divider, Panel } from '$components';
-	import ImportToSpotify from '$components/import-to-spotify.svelte';
-	import Track from '$components/track.svelte';
+	import { Badge, Divider, Panel, ImportToSpotify, Track } from '$components';
 	import type { Match, URI } from '$lib/types';
 	import type { PageData } from './$types';
 
