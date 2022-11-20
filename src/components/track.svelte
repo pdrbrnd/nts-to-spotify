@@ -1,7 +1,6 @@
 <script lang="ts">
 	import type { BasicTrack, Match, URI } from '$lib/types';
 	import { slide } from 'svelte/transition';
-	import Badge from './badge.svelte';
 	import Button from './button.svelte';
 	import Checkbox from './checkbox.svelte';
 	import Song from './song.svelte';
@@ -30,6 +29,7 @@
 				cover={match ? { type: 'spotify', src: match.cover } : { type: 'nts' }}
 				loading={matches === undefined}
 				disabled={!!hasNoMatch}
+				href={match?.href}
 			/>
 		</div>
 		<div class="right">
@@ -53,6 +53,7 @@
 						title={match.title}
 						preview={match?.preview}
 						cover={{ type: 'spotify', src: match.cover }}
+						href={match.href}
 					/>
 					<div class="right">
 						{#if selectedMatch === match.uri}

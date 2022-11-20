@@ -45,7 +45,8 @@ const fetchNext = async ({
 		title: item.name,
 		uri: item.uri,
 		preview: item.preview_url || undefined,
-		cover: item.album.images[0].url
+		cover: item.album.images[0].url,
+		href: item.external_urls.spotify
 	}));
 
 	return { artist, title, matches, retry };

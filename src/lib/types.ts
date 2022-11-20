@@ -97,4 +97,5 @@ export type Match = {
 	title: string;
 	cover?: string;
 	preview?: string;
+	href: string;
 };

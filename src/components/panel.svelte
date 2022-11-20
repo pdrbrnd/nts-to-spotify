@@ -21,7 +21,7 @@
 	section {
 		margin-top: 30vh;
 
-		width: min(100%, 550px);
+		width: min(100%, 600px);
 	}
 
 	.padded {

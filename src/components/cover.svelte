@@ -17,24 +17,7 @@
 		/>
 	</svg>
 {:else}
-	<div class="root">
-		<img class="cover" src={src.src || ''} alt="" />
-		<svg
-			class="spotify"
-			width="16"
-			height="16"
-			viewBox="0 0 16 16"
-			fill="none"
-			xmlns="http://www.w3.org/2000/svg"
-		>
-			<rect x="0.5" y="0.5" width="15" height="15" rx="7.5" fill="var(--color-foreground)" />
-			<path
-				d="M2 7.98209C2 11.2776 4.71429 14 8 14C11.2857 14 14 11.2776 14 7.98209C14 4.68657 11.2857 2 8 2C4.71429 2 2 4.68657 2 7.98209ZM10.2143 10.7761C8.82143 9.91642 7.03571 9.70149 4.96429 10.1672C4.46429 10.2388 4.39286 9.52239 4.82143 9.45075C7.10714 8.91343 9.03571 9.16418 10.6071 10.1313C11 10.3821 10.6071 10.991 10.2143 10.7761ZM10.8214 9.16418C9.21429 8.16119 6.75 7.87463 4.85714 8.44776C4.25 8.62687 4.03571 7.69552 4.60714 7.55224C6.78571 6.90746 9.46429 7.22985 11.3214 8.37612C11.8214 8.69851 11.3214 9.48657 10.8214 9.16418ZM4.57143 6.6209C3.96429 6.83582 3.57143 5.79701 4.25 5.54627C6.35714 4.90149 9.92857 5.00896 12.1429 6.33433C12.75 6.65672 12.1786 7.6597 11.5357 7.30149C9.60714 6.15522 6.39286 6.04776 4.57143 6.6209Z"
-				fill="var(--color-background)"
-			/>
-			<rect x="0.5" y="0.5" width="15" height="15" rx="7.5" stroke="var(--color-background)" />
-		</svg>
-	</div>
+	<img class="cover" src={src.src || ''} alt="" />
 {/if}
 
 <style lang="postcss">
@@ -43,21 +26,13 @@
 	}
 
 	.cover {
-		width: 32px;
-		height: 32px;
+		flex-shrink: 0;
+
+		width: 60px;
+		height: 60px;
 		object-fit: cover;
 		object-position: center;
 
 		background-color: hsl(var(--color-foreground-hsl) / 0.1);
-	}
-
-	div {
-		position: relative;
-	}
-
-	.spotify {
-		position: absolute;
-		bottom: -4px;
-		right: -4px;
 	}
 </style>
