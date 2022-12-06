@@ -31,6 +31,12 @@
 			<li>Login with Spotify to be able to import the playlist</li>
 		</ol>
 
+		<p class="font-base">
+			<a href="/shows/the-breakfast-show-flo/episodes/the-breakfast-show-flo-30th-november-2022"
+				>See example</a
+			>
+		</p>
+
 		{#if !me}
 			<LoginWithSpotify />
 		{/if}
@@ -85,9 +91,9 @@
 		& p:not(:last-child) {
 			margin-bottom: 8px;
 		}
+	}
 
-		& a {
-			text-decoration: underline;
-		}
+	a {
+		text-decoration: underline;
 	}
 </style>
