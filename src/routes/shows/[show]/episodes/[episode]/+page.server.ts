@@ -16,18 +16,19 @@ const fetchNext = async ({
 	title: string;
 	retry?: boolean;
 }): Promise<{ artist: string; title: string; matches: Match[]; retry?: boolean }> => {
-	// if it's a retry, let's try to fetch without the artist name
-	const res = await fetch(
-		`https://api.spotify.com/v1/search?type=track&q=${
-			!retry ? `artist:${artist}` : ''
-		} track:${title}`,
-		{
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${token}`
-			}
+	let url = `https://api.spotify.com/v1/search?type=track&q=track:${encodeURIComponent(title)}`;
+
+	// if it's the first attempt, let's try to fetch with the artist name (might make it too specific though)
+	if (!retry) {
+		url += `%20artist:${encodeURIComponent(artist)}`;
+	}
+
+	const res = await fetch(url, {
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: `Bearer ${token}`
 		}
-	);
+	});
 
 	if (res.status === 429) {
 		await sleep(Number(res.headers.get('Retry-After') || 1) * 1000);

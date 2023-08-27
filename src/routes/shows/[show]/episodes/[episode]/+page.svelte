@@ -50,7 +50,7 @@
 				{/each}
 			</div>
 		{:else}
-			<p class="font-small-beast">No tracks available</p>
+			<p class="no-tracks font-small-beast">No tracks found</p>
 		{/if}
 	</article>
 
@@ -84,6 +84,14 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
+	}
+
+	.no-tracks {
+		padding-inline: 24px;
+
+		@media (--md) {
+			padding-inline: 40px;
+		}
 	}
 
 	.list {
