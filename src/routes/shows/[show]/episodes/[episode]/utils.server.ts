@@ -51,7 +51,7 @@ export function getNTSData(cheerio: CheerioAPI) {
 	// Tracks
 	const tracks: { artist: string; title: string }[] = [];
 
-	cheerio('ul.tracks li.track').each((_i, el) => {
+	cheerio('ul.tracklist__tracks li.track').each((_i, el) => {
 		const artist = cheerio(el).find('.track__artist:not(.track__artist--mobile)').text();
 		const title = cheerio(el).find('.track__title').text();
 
