@@ -3,16 +3,15 @@ import type { RequestHandler } from './$types';
 import { getAccessToken } from '$lib/utils/auth.server';
 
 export const POST: RequestHandler = async (event) => {
-	const { user, cover, name, description, tracks } = (await event.request.json()) as {
+	const { user, name, description, tracks } = (await event.request.json()) as {
 		user: string;
 		name: string;
 		description: string;
-		cover: string;
 		tracks: string[];
 	};
 
-	if ([user, name, description, cover, tracks].some((field) => !field)) {
-		throw error(400, `User, name, description, cover and tracks are required`);
+	if ([user, name, description, tracks].some((field) => !field)) {
+		throw error(400, `User, name, description, and tracks are required`);
 	}
 
 	const token = await getAccessToken(event);
@@ -29,16 +28,6 @@ export const POST: RequestHandler = async (event) => {
 			headers
 		});
 		const { id: playlistId } = await createPlaylist.json();
-
-		// cover
-		await event.fetch(`https://api.spotify.com/v1/playlists/${playlistId}/images`, {
-			method: 'PUT',
-			body: cover.replace('data:image/jpeg;base64,', '').replaceAll('\n', ''),
-			headers: {
-				...headers,
-				'Content-Type': 'image/jpeg'
-			}
-		});
 
 		// add tracks
 		await event.fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {

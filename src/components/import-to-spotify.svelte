@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { Button } from '$components';
-	import { drawCover, CANVAS_SIZE } from '$lib/utils/canvas';
 	import { onDestroy } from 'svelte';
 	import LoginWithSpotify from './login-with-spotify.svelte';
 
@@ -13,15 +12,6 @@
 		cover: string;
 		tracks: string[];
 	};
-
-	let showCover: boolean = false;
-	let canvas: HTMLCanvasElement;
-
-	$: {
-		const ctx = canvas?.getContext('2d');
-
-		if (ctx) drawCover(ctx, data);
-	}
 
 	const me = $page.data.user;
 
@@ -41,7 +31,6 @@
 					user: me.id,
 					name: data.title,
 					description: data.description,
-					cover: canvas.toDataURL('image/jpeg'),
 					tracks: data.tracks
 				})
 			});
@@ -73,17 +62,12 @@
 				icon="spotify"
 				disabled={disabled || creating}
 				loading={creating}
-				on:click={handleClick}
-				on:mouseenter={() => (showCover = true)}
-				on:mouseleave={() => (showCover = false)}>Import to Spotify</Button
+				on:click={handleClick}>Import to Spotify</Button
 			>
 		{:else}
 			<LoginWithSpotify label="Login to import" />
 		{/if}
 	</div>
-	{#if showCover}
-		<canvas bind:this={canvas} width={CANVAS_SIZE} height={CANVAS_SIZE} />
-	{/if}
 </footer>
 
 <style lang="postcss">
@@ -115,14 +99,5 @@
 			align-items: center;
 			gap: 8px;
 		}
-	}
-
-	canvas {
-		position: absolute;
-		width: min(400px, 90%);
-		aspect-ratio: 1 / 1;
-		right: 2px;
-		bottom: calc(100% + 2px);
-		border: 1px solid var(--color-foreground);
 	}
 </style>
