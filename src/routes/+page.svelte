@@ -45,16 +45,28 @@
 
 		<div>
 			<p class="support font-base">Support the project</p>
-			<Button
-				as="a"
-				variant="outline"
-				icon="coffee"
-				href="https://ko-fi.com/pdrbrnd"
-				target="_blank"
-				rel="noopener noreferrer"
-			>
-				<span class="coffee">Buy me a coffee</span>
-			</Button>
+			<div class="buttons">
+				<Button
+					as="a"
+					variant="outline"
+					icon="coffee"
+					href="https://ko-fi.com/pdrbrnd"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<span class="coffee">Buy me a coffee</span>
+				</Button>
+				<Button
+					as="a"
+					variant="outline"
+					icon="github"
+					href="https://github.com/pdrbrnd/nts-to-spotify"
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					<span>View on GitHub</span>
+				</Button>
+			</div>
 		</div>
 	</div>
 </Panel>
@@ -95,5 +107,11 @@
 
 	a {
 		text-decoration: underline;
+	}
+
+	.buttons {
+		display: flex;
+		align-items: center;
+		gap: 8px;
 	}
 </style>

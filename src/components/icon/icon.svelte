@@ -6,6 +6,7 @@
 	import search from './icons/search.svg?raw';
 	import spotify from './icons/spotify.svg?raw';
 	import stop from './icons/stop.svg?raw';
+	import github from './icons/github.svg?raw';
 
 	const icons = {
 		['arrow-right']: arrowRight,
@@ -14,7 +15,8 @@
 		replace,
 		search,
 		spotify,
-		stop
+		stop,
+		github
 	};
 
 	export let icon: keyof typeof icons;
